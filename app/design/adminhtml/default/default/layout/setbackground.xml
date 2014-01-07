@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <setbackground_adminhtml_background_index>
+        <reference name="content">
+            <block type="setbackground/adminhtml_background" name="setbackground" />
+        </reference>
+    </setbackground_adminhtml_background_index>
+    <setbackground_adminhtml_backgrounditem_index>
+        <reference name="content">
+            <block type="setbackground/adminhtml_backgrounditem" name="setbackgrounditem" />
+        </reference>
+    </setbackground_adminhtml_backgrounditem_index>
+</layout>

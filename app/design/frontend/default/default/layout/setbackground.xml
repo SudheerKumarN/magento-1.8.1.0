@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <!--
+            <action method="addCss"><stylesheet>css/setbackground.css</stylesheet></action>
+            -->
+            <block type="setbackground/background" name="background" template="setbackground/setcss.phtml">
+                <action method="setBackgroundId"><background_id>background</background_id></action>  
+            </block>		
+        </reference>	        	
+    </default>
+    
+    <!--
+    <setbackground_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="setbackground/background" name="background" template="setbackground/setcss.phtml">
+                 <action method="setBackgroundId"><background_id>home</background_id></action>
+            </block>
+        </reference>
+    </setbackground_index_index>
+    -->
+    
+</layout> 

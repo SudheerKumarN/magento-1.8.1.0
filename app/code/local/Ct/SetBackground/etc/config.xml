@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ct_SetBackground>
+            <version>0.1.3</version>
+        </Ct_SetBackground>
+    </modules>
+    
+    <frontend>
+        <routers>
+            <setbackground>
+                <use>standard</use>
+                <args>
+                    <module>Ct_SetBackground</module>
+                    <frontName>setbackground</frontName>
+                </args>
+            </setbackground>
+        </routers>
+        <layout>
+            <updates>
+                <setbackground>
+                    <file>setbackground.xml</file>
+                </setbackground>
+            </updates>
+        </layout>
+    </frontend>
+    
+    <admin>
+        <routers>
+            <setbackground>
+                <use>admin</use>
+                <args>
+                    <module>Ct_SetBackground</module>
+                    <frontName>setbackground</frontName>
+                </args>
+            </setbackground>
+        </routers>
+    </admin>
+    
+    <adminhtml>
+        <menu>
+            <setbackground module="setbackground">
+                <title>Set Background</title>
+                <sort_order>71</sort_order>               
+                <children>
+                    <backgrounds module="setbackground">
+                        <title>Manage SetBackgrounds</title>
+                        <sort_order>0</sort_order>
+                        <action>setbackground/adminhtml_background</action>
+                    </backgrounds>
+                </children>
+                <children>
+                    <backgrounditems module="setbackground">
+                        <title>Manage SetBackground Items</title>
+                        <sort_order>10</sort_order>
+                        <action>setbackground/adminhtml_backgrounditem</action>
+                    </backgrounditems>
+                </children>
+            </setbackground>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <setbackground module="setbackground">
+                            <title>Set Background</title>
+                            <sort_order>71</sort_order>               
+                            <children>
+                                <backgrounds module="setbackground">
+                                    <title>Manage SetBackgrounds</title>
+                                    <sort_order>0</sort_order>
+                                </backgrounds>
+                            </children>
+                            <children>
+                                <backgrounditems module="setbackground">
+                                    <title>Manage SetBackground Items</title>
+                                    <sort_order>10</sort_order>
+                                </backgrounditems>
+                            </children>
+                        </setbackground>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <setbackground translate="title" module="setbackground">
+                                            <title>Set Background</title>
+                                        </setbackground>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <setbackground>
+                    <file>setbackground.xml</file>
+                </setbackground>
+            </updates>
+        </layout>
+    </adminhtml>  
+     
+    <global>
+        
+        <models>
+            <setbackground>
+                <class>Ct_SetBackground_Model</class>
+                <resourceModel>setbackground_mysql4</resourceModel>
+            </setbackground>
+            
+            <setbackground_mysql4>
+                <class>Ct_SetBackground_Model_Mysql4</class>                
+                <entities>
+                    <background>
+                        <table>set_background</table>
+                    </background>
+                </entities>
+                <entities>
+                    <backgrounditem>
+                        <table>set_background_item</table>
+                    </backgrounditem>
+                </entities>
+            </setbackground_mysql4>
+        </models>
+        
+        <resources>
+            <setbackground_setup>
+                <setup>
+                    <module>Ct_SetBackground</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </setbackground_setup>
+            <setbackground_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </setbackground_write>
+            <setbackground_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </setbackground_read>
+        </resources>
+        
+        <blocks>
+            <setbackground>
+                <class>Ct_SetBackground_Block</class>
+            </setbackground>
+        </blocks>
+        
+        <helpers>
+            <setbackground>
+                <class>Ct_SetBackground_Helper</class>
+            </setbackground>
+        </helpers>
+        
+    </global>
+    
+    <default>
+        <setbackground>
+            <info>
+                <enabled>1</enabled>
+            </info>
+        </setbackground>
+    </default>
+</config>

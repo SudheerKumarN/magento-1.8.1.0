@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Ct_SetBackground>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Ct_SetBackground>
+    </modules>
+</config> 
