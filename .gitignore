@@ -1,0 +1,8 @@
+nbproject/
+*.log
+/var/
+/app/etc/local.xml
+/media/
+/downloader/.cache/
+/tmp/
+

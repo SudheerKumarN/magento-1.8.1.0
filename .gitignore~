@@ -1,0 +1,10 @@
+nbproject/
+*.log
+/var/
+/app/etc/local.xml
+/media/
+/downloader/.cache/
+.idea/
+/v2_files/
+/tmp/
+/lib/Zend/Cache/
