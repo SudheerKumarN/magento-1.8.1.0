@@ -2,8 +2,7 @@
 
 $this->startSetup()->run("
 
-ALTER TABLE {$this->getTable('set_background')}
-    ADD COLUMN `show_title` smallint(6) NOT NULL default '0' AFTER `title`;
+
 
 ALTER TABLE {$this->getTable('set_background_item')}
 	CHANGE `filename` `image` varchar(255) NOT NULL default '',

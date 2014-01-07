@@ -1,5 +1,5 @@
 <?php
-class Ct_SetBackground_Block_Background extends Mage_Core_Block_Template
+class Ct_SetBackgrounditem_Block_Background extends Mage_Core_Block_Template
 {
 	protected $_background = false;
 
@@ -8,9 +8,9 @@ class Ct_SetBackground_Block_Background extends Mage_Core_Block_Template
 		return parent::_prepareLayout();
     }
     
-    public function getBackground()     
-     { 
-        Mage::log('1===' . print_r($this->getData()) );
+//    public function getBackgrounditem()     
+//     { 
+//        Mage::log('===' . $this->_background);
 //        if (!$this->_background) {
 //
 //                //$background_id = $this->getData('id');
@@ -19,36 +19,33 @@ class Ct_SetBackground_Block_Background extends Mage_Core_Block_Template
 //                //echo $background_id;
 //
 //                if ($background_id) {
-//                        $background = Mage::getModel('setbackground/background')->load($background_id);
+//                        $background = Mage::getModel('setbackground/background_item')->load($background_id);
 //                        //var_dump($background);	exit;
 //                        if ($background->getId()==0) {
-//                                $background = Mage::getModel('setbackground/background')->load($background_id, 'identifier');
+//                                $background = Mage::getModel('setbackground/background_item')->load($background_id, 'identifier');
 //                        }
 //                        $this->_background = $background;
 //                }
 //        }
 //        return $this->_background;       
-    }
+//    }
 
-	public function isVisible() {
+//	public function isVisible() {
 //            return $this->getBackground() && $this->getBackground()->getStatus();
-            return true;
-	}
+//	}
 
 	public function getBackgroundItems($storeId = 1) {
-            
-            Mage::log('2===' . $this->_background);
-            if ($this->isVisible()) {
-//                    $background = $this->getBackground();
+//            if ($this->isVisible()) {
+                    $background = $this->getBackground();
 
                     $collection = Mage::getModel('setbackground/backgrounditem')->getCollection()
                             ->addFieldToFilter('store', $storeId)
                             ->addFieldToFilter('status', true)
-//                            ->addFieldToFilter('background_id', $background->getId())
+                            ->addFieldToFilter('background_id', $background->getId())
                             ->setOrder('background_order','ASC');
                     return $collection;
-            }
-            return false;
+//            }
+//            return false;
 	}
         
         public function getBackgImgByTitle($title) {

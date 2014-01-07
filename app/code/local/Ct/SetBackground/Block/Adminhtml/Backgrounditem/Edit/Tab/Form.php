@@ -9,17 +9,17 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
         $fieldset = $form->addFieldset('setbackgrounditem_form', array('legend' => Mage::helper('setbackground')->__('Background Item information')));
 
         $backgrounds = array('' => '-- Select Background --');
-        $collection = Mage::getModel('setbackground/background')->getCollection();
-        foreach ($collection as $background) {
-            $backgrounds[$background->getId()] = $background->getTitle();
-        }
+//        $collection = Mage::getModel('setbackground/background')->getCollection();
+//        foreach ($collection as $background) {
+//            $backgrounds[$background->getId()] = $background->getTitle();
+//        }
 
-        $fieldset->addField('background_id', 'select', array(
-            'label' => Mage::helper('setbackground')->__('Background'),
-            'name' => 'background_id',
-            'required' => true,
-            'values' => $backgrounds,
-        ));
+//        $fieldset->addField('background_id', 'select', array(
+//            'label' => Mage::helper('setbackground')->__('Background'),
+//            'name' => 'background_id',
+//            'required' => true,
+//            'values' => $backgrounds,
+//        ));
 
         $fielsStore = $fieldset->addField('store', 'select', array(
             'label' => Mage::helper('setbackground')->__('Store'),
@@ -41,14 +41,14 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
                 
             }
         </script>");        
-
+        
         $eventTitle = $fieldset->addField('title', 'select', array(
             'label' => Mage::helper('setbackground')->__('Title'),
             'class' => 'required-entry',
             'required' => true,
             'name' => 'title',
             'values' => $this->getCmsPageAndCategoryArray($this->getStoreId($this->getRequest()->getParam('id')))
-                ));
+        ));
 
 
         $fieldset->addField('image', 'image', array(
@@ -121,7 +121,7 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
         $cat[] = array('value' => 'Default Category', 'label' => 'Default Category');
         foreach ($categories as $category) {
             $cat[] = array(
-                'value' => $category->getName(),
+                'value' => $category->getId(),
                 'label' => Mage::helper('setbackground')->__($category->getName()),
                 'style' => 'padding-left:10px;',
                 'class' => 'myclass',

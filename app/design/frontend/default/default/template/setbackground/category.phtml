@@ -34,16 +34,6 @@
                             <?php continue; ?>
                         <?php endif; ?>
                     <? endforeach; ?>  
-
-                <?php elseif ($_background_item->getTitle() == 'view'): ?>
-                    <style>
-                        body.catalog-product-view{background: url("<?php echo Mage::getBaseUrl('media') . $_background_item->getImage() ?>") repeat-y fixed 50% 0 transparent; background-size: 100% auto;}
-                    </style>
-                    
-                <?php elseif ($_background_item->getTitle() == 'home'): ?>
-                    <style>
-                        body.cms-index-index, body.cms-page-view, body.customer-account-login, body.customer-account-create, body.customer-account-forgotpassword{background: url("<?php echo Mage::getBaseUrl('media') . $_background_item->getImage() ?>") repeat-y fixed 50% 0 transparent; background-size: 100% auto;}
-                    </style>
                     
                 <?php endif; ?>
                     

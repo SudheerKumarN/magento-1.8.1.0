@@ -28,20 +28,20 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Grid extends Mage_Adminhtm
           'index'     => 'background_item_id',
         ));
 
-        $backgrounds = array();
-        $collection = Mage::getModel('setbackground/background')->getCollection();
-        foreach ($collection as $background) {
-             $backgrounds[$background->getId()] = $background->getTitle();
-        }
-
-        $this->addColumn('background_id', array(
-            'header'    => Mage::helper('setbackground')->__('Background'),
-            'align'     =>'left',
-            'index'     => 'background_id',
-                  'type'      => 'options',
-            'options'   => $backgrounds,
-        ));
-
+//        $backgrounds = array();
+//        $collection = Mage::getModel('setbackground/background')->getCollection();
+//        foreach ($collection as $background) {
+//             $backgrounds[$background->getId()] = $background->getTitle();
+//        }
+//
+//        $this->addColumn('background_id', array(
+//            'header'    => Mage::helper('setbackground')->__('Background'),
+//            'align'     =>'left',
+//            'index'     => 'background_id',
+//                  'type'      => 'options',
+//            'options'   => $backgrounds,
+//        ));
+//
         $this->addColumn('image',
             array(
                 'header'=> Mage::helper('setbackground')->__('Image'),

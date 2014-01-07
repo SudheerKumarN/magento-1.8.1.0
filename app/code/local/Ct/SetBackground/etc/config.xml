@@ -42,13 +42,13 @@
             <setbackground module="setbackground">
                 <title>Set Background</title>
                 <sort_order>71</sort_order>               
-                <children>
+              <!--  <children>
                     <backgrounds module="setbackground">
                         <title>Manage SetBackgrounds</title>
                         <sort_order>0</sort_order>
                         <action>setbackground/adminhtml_background</action>
                     </backgrounds>
-                </children>
+                </children>-->
                 <children>
                     <backgrounditems module="setbackground">
                         <title>Manage SetBackground Items</title>
@@ -115,11 +115,11 @@
             
             <setbackground_mysql4>
                 <class>Ct_SetBackground_Model_Mysql4</class>                
-                <entities>
+           <!--     <entities>
                     <background>
                         <table>set_background</table>
                     </background>
-                </entities>
+                </entities> -->
                 <entities>
                     <backgrounditem>
                         <table>set_background_item</table>
