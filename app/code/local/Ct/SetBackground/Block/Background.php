@@ -54,7 +54,6 @@ class Ct_SetBackground_Block_Background extends Mage_Core_Block_Template
                     ->addFieldToFilter('store', $storeId)
                     ->addFieldToFilter('status', true)
                     ->addFieldToFilter('title', array('eq' => $currentPlace))
-        //                            ->addFieldToFilter('background_id', $background->getId())
                     ->setOrder('background_order','ASC');
             Mage::log($collection->getData());
             return $collection;
@@ -62,7 +61,6 @@ class Ct_SetBackground_Block_Background extends Mage_Core_Block_Template
         
         public function getBackgImgByTitle($title) {
             if ($this->isVisible()) {
-                    $background = $this->getBackground();
 
                     $collection = Mage::getModel('setbackground/backgrounditem')->getCollection()
                             ->addFieldToFilter('status', true)
