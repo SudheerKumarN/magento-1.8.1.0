@@ -1,0 +1,36 @@
+/**
+ * Ct
+ *
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://codetiburon.com/)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+ 
+ 
+.wrapper {
+    position: relative;
+    z-index: 10;
+}
+
+.nav-container, .main-container{ background: none; }
+
+.header-container {
+    margin: auto;
+    width: 954px;
+}
+
+.footer { background: none repeat scroll 0 0 #618499; }
+
+.footer-container {
+    margin: auto;
+    width: 950px;
+}
+
+ #setbackground {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}

@@ -1,0 +1,41 @@
+<?php
+/**
+ * Set background for:
+ * Home page
+ * Category default
+ * Category custom
+ * Product page
+ * CMS page 
+ * 
+ */
+
+
+$currentPlace = Mage::helper('setbackground')->getCurrentPlace();
+//echo $currentPlace;
+
+$model = Mage::getModel('catalog/category');
+$categories = $model->getCollection()->addAttributeToSelect('*')->addIsActiveFilter()->addLevelFilter(2);
+
+?>
+
+<?php if (Mage::getStoreConfig('setbackground/info/enabled')): ?>
+
+        <?php //$_background = $this->getBackground(); ?>
+        <?php $_background_items = $this->getBackgroundItem($currentPlace); ?>
+
+        <?php foreach ($_background_items as $_background_item): ?>                           
+            <?php if ($_background_item->getTitle() == $currentPlace): ?>
+                <?php foreach ($categories as $category): ?>  
+                    <div id="setbackground"></div>
+                    <style>
+                        #setbackground {
+                            background: url("<?php echo Mage::getBaseUrl('media') . $_background_item->getImage() ?>") repeat fixed 100% 0 / 100% auto transparent;
+                        }
+                    </style>
+                    <?php continue; ?>
+                <? endforeach; ?>                     
+            <?php endif; ?>                   
+        <?php endforeach; ?>
+                    
+<?php endif;?>
+

@@ -11,20 +11,23 @@
 
     <?php //if ($this->isVisible()): ?> 
 
-        <?php $_background = $this->getBackground(); ?>
+        <?php //$_background = $this->getBackground(); ?>
         <?php $_background_items = $this->getBackgroundItems(); ?>
         <?php $flag = 0; ?>
 
+        <?php if ($_background_items): ?>
         <?php foreach ($_background_items as $_background_item): ?>
 
             <?php if ($_background_item->getImage()): ?>
 
                 <?php if ($_background_item->getTitle() == 'Default Category' AND $flag == 0): ?>
+                    <?php Mage::log('111'); ?>
                     <style>
                         body.catalog-category-view{background: url("<?php echo Mage::getBaseUrl('media') . $_background_item->getImage() ?>") repeat-y fixed 50% 0 transparent; background-size: 100% auto;}
                     </style>
                             
                 <?php elseif ($_background_item->getTitle() != 'view' AND $_background_item->getTitle() != 'home' AND $_background_item->getTitle() != 'Default Category'): ?>
+                    <?php Mage::log(Mage::getBaseUrl('media') . $_background_item->getImage()); ?>
                     <?php foreach ($categories as $category): ?>               
                         <?php if($category->getName() == $activCat AND $activCat == $_background_item->getTitle() ): ?> 
                             <style>
@@ -36,11 +39,13 @@
                     <? endforeach; ?>  
 
                 <?php elseif ($_background_item->getTitle() == 'view'): ?>
+                            <?php Mage::log('333'); ?>
                     <style>
                         body.catalog-product-view{background: url("<?php echo Mage::getBaseUrl('media') . $_background_item->getImage() ?>") repeat-y fixed 50% 0 transparent; background-size: 100% auto;}
                     </style>
                     
                 <?php elseif ($_background_item->getTitle() == 'home'): ?>
+                    <?php Mage::log('444'); ?>
                     <style>
                         body.cms-index-index, body.cms-page-view, body.customer-account-login, body.customer-account-create, body.customer-account-forgotpassword{background: url("<?php echo Mage::getBaseUrl('media') . $_background_item->getImage() ?>") repeat-y fixed 50% 0 transparent; background-size: 100% auto;}
                     </style>
@@ -49,6 +54,7 @@
                     
             <?php endif; ?>   
         <?php endforeach; ?>
+        <?php endif; ?>  
 
     <?php //endif; ?>
                     

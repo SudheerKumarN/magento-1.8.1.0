@@ -2,13 +2,26 @@
 <layout version="0.1.0">
     <default>
         <reference name="head">
-            <!--
+            
             <action method="addCss"><stylesheet>css/setbackground.css</stylesheet></action>
-            -->
+            <!--
             <block type="setbackground/background" name="background" template="setbackground/setcss.phtml">
                 <action method="setBackgroundId"><background_id>background</background_id></action>  
-            </block>		
-        </reference>	        	
+            </block>	
+            	
+            <block type="setbackground/background" name="background" template="setbackground/category.phtml">
+                <action method="setBackgroundId"><background_id>background</background_id></action>  
+            </block>-->
+        </reference>	
+        
+        <!---->
+        <reference name="after_body_start">
+                <block type="setbackground/background" name="background" template="setbackground/background.phtml">
+                    <action method="setBackgroundId"><background_id>background</background_id></action>  
+                </block>
+        </reference> 
+        
+                             	
     </default>
     
     <!--

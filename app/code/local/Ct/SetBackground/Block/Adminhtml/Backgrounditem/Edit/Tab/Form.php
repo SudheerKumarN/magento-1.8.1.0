@@ -114,9 +114,6 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
             ->addLevelFilter(2)
             ->addFieldToFilter('path', array('like'=> "1/$rootId/%"));
 
-        
-        Mage::log($categories, null, 'form.log');
-
         $cat[] = array('value' => '=== Please select category ===', 'label' => '=== Please select category ===');
         $cat[] = array('value' => 'Default Category', 'label' => 'Default Category');
         foreach ($categories as $category) {
@@ -134,7 +131,7 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
         foreach ($collection as $category) {
             $data = $category->getData();
             $cat[] = array(
-                'value' => $data['title'],
+                'value' => $data['page_id'],
                 'label' => $data['title'],
                 'style' => 'padding-left:10px;',
             );
