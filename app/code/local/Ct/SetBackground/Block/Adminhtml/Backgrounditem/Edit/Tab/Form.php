@@ -42,13 +42,50 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
             }
         </script>");        
         
+        $eventType = $fieldset->addField('type', 'select', array(
+            'label' => Mage::helper('setbackground')->__('Type'),
+            'class' => 'required-entry',
+            'required' => true,
+            'onchange' => "typeSelect(this)",
+            'name' => 'type',
+            'values' => array(
+                'category' => 'Category page', 
+                'page' => 'Cms page', 
+                'route' => 'Route page'
+                ),  
+        ));
+        
+        /*
+         * Add Ajax to the Title select box html output
+         */
+        $eventType->setAfterElementHtml("<script type=\"text/javascript\">
+            function typeSelect(selectElement){
+                var reloadurl = '". $this
+                 ->getUrl('setbackground/ajax/title') . "type/' + selectElement.value;
+                new Ajax.Request(reloadurl, {
+                    method: 'get',
+                    onLoading: function (stateform) {
+                        $('title').update('Searching...');
+                    },
+                    onComplete: function(stateform) {
+                        $('title').update(stateform.responseText);
+                    }
+                });
+            }
+        </script>");
+        
+
+        
         $eventTitle = $fieldset->addField('title', 'select', array(
             'label' => Mage::helper('setbackground')->__('Title'),
             'class' => 'required-entry',
             'required' => true,
             'name' => 'title',
-            'values' => $this->getCmsPageAndCategoryArray($this->getStoreId($this->getRequest()->getParam('id')))
+            'values' => $this->getCmsPageAndCategoryArray($this->getStoreId($this->getRequest()->getParam('id'))),
+//            'value' => 4
+                
         ));
+//        Mage::log($eventTitle);
 
 
         $fieldset->addField('image', 'image', array(
@@ -118,7 +155,7 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
         $cat[] = array('value' => 'Default Category', 'label' => 'Default Category');
         foreach ($categories as $category) {
             $cat[] = array(
-                'value' => $category->getId(),
+                'value' => 'cat_' . $category->getId(),
                 'label' => Mage::helper('setbackground')->__($category->getName()),
                 'style' => 'padding-left:10px;',
                 'class' => 'myclass',
@@ -131,7 +168,7 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
         foreach ($collection as $category) {
             $data = $category->getData();
             $cat[] = array(
-                'value' => $data['page_id'],
+                'value' => 'cms_' . $data['page_id'],
                 'label' => $data['title'],
                 'style' => 'padding-left:10px;',
             );
@@ -139,6 +176,8 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
 
         return $cat;
     }
+    
+    
     
     private function getStoreId($itemId) {
         $collection = Mage::getModel('setbackground/backgrounditem')->getCollection()->addFieldToFilter('background_item_id', $itemId);

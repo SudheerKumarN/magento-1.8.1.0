@@ -11,6 +11,7 @@ CREATE TABLE {$this->getTable('set_background_item')} (
   `background_item_id` int(11) unsigned NOT NULL auto_increment,
   `background_id` int(11) unsigned NOT NULL,
   `title` varchar(255) NOT NULL default '',
+  `type` varchar(255) NOT NULL default '',
   `image` varchar(255) NOT NULL default '',
   `image_url` varchar(512) NOT NULL default '',
   `thumb_image` varchar(255) NOT NULL default '',
@@ -20,6 +21,7 @@ CREATE TABLE {$this->getTable('set_background_item')} (
   `status` smallint(6) NOT NULL default '0',
   `created_time` datetime NULL,
   `update_time` datetime NULL,
+  `store` int(11) unsigned NOT NULL,
   PRIMARY KEY (`background_item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

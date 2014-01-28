@@ -82,9 +82,10 @@ class Ct_SetBackground_Adminhtml_BackgrounditemController extends Mage_Adminhtml
                     unset($data['image']);
                 }
             }
-
-            if (isset($data['background_order'])) {
-                $data['background_order'] = intval($data['background_order']);
+            
+            Mage::log($data);
+            if (isset($data['type'])) {
+                $data['type'] = intval($data['type']);
             }
 
             if (isset($_FILES['thumb_image']['name']) && $_FILES['thumb_image']['name'] != '') {
