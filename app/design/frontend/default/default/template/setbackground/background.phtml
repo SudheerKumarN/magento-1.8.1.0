@@ -25,10 +25,11 @@ if(isset($configImage)){
     else $repeat = 'no-repeat';
     
     $attachment = $configImage['attachment'];
+    $zindex = $configImage['z-index'];
 }
 
-if($this->getConfigImage()) print 'true';
-else print 'false';
+//if($this->getConfigImage()) print 'true';
+//else print 'false';
 
 ?>
 
@@ -39,15 +40,13 @@ else print 'false';
 
         <?php foreach ($_background_items as $_background_item): ?>                           
             <?php if ($_background_item->getTitle() == $currentPlace): ?>
-                <?php foreach ($categories as $category): ?>  
-                    <div id="setbackground"></div>
-                    <style>
-                        #setbackground {
-                            background: url("<?php echo Mage::getBaseUrl('media') . $_background_item->getImage() ?>") <?php echo $repeat . ' ' . $attachment ?>  0 0 transparent;
-                        }
-                    </style>
-                    <?php continue; ?>
-                <? endforeach; ?>                     
+                <div id="setbackground"></div>
+                <style>
+                    #setbackground {
+                        background: url("<?php echo Mage::getBaseUrl('media') . $_background_item->getImage() ?>") <?php echo $repeat . ' ' . $attachment ?>  0 0 transparent;
+                        z-index: <?php echo $zindex ?>;
+                    }
+                </style>                   
             <?php endif; ?>                   
         <?php endforeach; ?>
                     
