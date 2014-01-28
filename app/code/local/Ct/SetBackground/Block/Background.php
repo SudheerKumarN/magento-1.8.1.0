@@ -14,7 +14,7 @@ class Ct_SetBackground_Block_Background extends Mage_Core_Block_Template
 
                 //$background_id = $this->getData('id');
                 $background_id = $this->getBackgroundId();
-                Mage::log('$background_id=' . $background_id);
+//                Mage::log('$background_id=' . $background_id);
 
                 //echo $background_id;
 
@@ -44,7 +44,7 @@ class Ct_SetBackground_Block_Background extends Mage_Core_Block_Template
                     ->addFieldToFilter('status', true)
         //                            ->addFieldToFilter('background_id', $background->getId())
                     ->setOrder('background_order','ASC');
-            Mage::log($collection->getData());
+//            Mage::log($collection->getData());
             return $collection;
 	}
         
@@ -55,7 +55,7 @@ class Ct_SetBackground_Block_Background extends Mage_Core_Block_Template
                     ->addFieldToFilter('status', true)
                     ->addFieldToFilter('title', array('eq' => $currentPlace))
                     ->setOrder('background_order','ASC');
-            Mage::log($collection->getData());
+//            Mage::log($collection->getData());
             return $collection;
 	}
         
@@ -76,5 +76,23 @@ class Ct_SetBackground_Block_Background extends Mage_Core_Block_Template
             }
             return false;
 	}
+        
+        public function getConfigImage()
+        {
+            $config = Mage::getStoreConfig('setbackground/image');
+            Mage::log($config);
+            
+            if(isset($config)) return $config;
+            return false;
+        }
+        
+        public function isEnabled()
+        {
+            $module = Mage::app()->getConfig()->getModuleConfig('Ct_SetBackground')->active;
+            $config = Mage::getStoreConfig('setbackground/info/enabled');
+            
+            if($module AND $config) return true;
+            return false;
+        }
           
 }

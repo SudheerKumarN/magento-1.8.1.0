@@ -103,6 +103,15 @@
                 </setbackground>
             </updates>
         </layout>
+        <translate>
+            <modules>
+                <translations>
+                    <files>
+                        <default>Ct_SetBackground.csv</default>
+                    </files>
+                </translations>
+            </modules>
+        </translate>
     </adminhtml>  
      
     <global>
@@ -168,6 +177,9 @@
             <info>
                 <enabled>1</enabled>
             </info>
+            <image>
+                <z-index>10</z-index>
+            </image>
         </setbackground>
     </default>
 </config>

@@ -16,9 +16,9 @@
         
         <!---->
         <reference name="after_body_start">
-                <block type="setbackground/background" name="background" template="setbackground/background.phtml">
-                    <action method="setBackgroundId"><background_id>background</background_id></action>  
-                </block>
+            <block type="setbackground/background" name="background" template="setbackground/background.phtml">
+                <action method="setBackgroundId"><background_id>background</background_id></action>  
+            </block>
         </reference> 
         
                              	

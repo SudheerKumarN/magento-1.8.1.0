@@ -15,6 +15,20 @@ $currentPlace = Mage::helper('setbackground')->getCurrentPlace();
 
 $model = Mage::getModel('catalog/category');
 $categories = $model->getCollection()->addAttributeToSelect('*')->addIsActiveFilter()->addLevelFilter(2);
+$configImage = $this->getConfigImage();
+$attachment = '';
+$repeat = '';
+if(isset($configImage)){
+    if($configImage['repeat-x'] == 1 AND $configImage['repeat-y'] == 1) $repeat = 'repeat';
+    elseif($configImage['repeat-x'] == 1 AND $configImage['repeat-y'] == 0) $repeat = 'repeat-x';
+    elseif($configImage['repeat-x'] == 0 AND $configImage['repeat-y'] == 1) $repeat = 'repeat-y';
+    else $repeat = 'no-repeat';
+    
+    $attachment = $configImage['attachment'];
+}
+
+if($this->getConfigImage()) print 'true';
+else print 'false';
 
 ?>
 
@@ -29,7 +43,7 @@ $categories = $model->getCollection()->addAttributeToSelect('*')->addIsActiveFil
                     <div id="setbackground"></div>
                     <style>
                         #setbackground {
-                            background: url("<?php echo Mage::getBaseUrl('media') . $_background_item->getImage() ?>") repeat fixed 100% 0 / 100% auto transparent;
+                            background: url("<?php echo Mage::getBaseUrl('media') . $_background_item->getImage() ?>") <?php echo $repeat . ' ' . $attachment ?>  0 0 transparent;
                         }
                     </style>
                     <?php continue; ?>

@@ -56,7 +56,7 @@
                             <label>Repeat-x</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>25</sort_order>
+                            <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -65,20 +65,31 @@
                             <label>Repeat-y</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>25</sort_order>
+                            <sort_order>16</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                        </repeat-y>
+                        </repeat-y> <!--  -->                 
+                        <attachment translate="label">
+                            <label>Background-attachment</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>setbackground/select_attachment</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </attachment>	
                         <z-index translate="label">
                             <label>Z-index</label>
                             <frontend_type>text</frontend_type>
+                            <!--
                             <source_model>adminhtml/system_config_source_yesno</source_model>
+                            -->
                             <sort_order>25</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
-                        </z-index>		
+                        </z-index>	
                     </fields>
                 </image>
             </groups>
