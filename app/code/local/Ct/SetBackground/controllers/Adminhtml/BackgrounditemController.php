@@ -233,7 +233,7 @@ class Ct_SetBackground_Adminhtml_BackgrounditemController extends Mage_Adminhtml
                     $param = explode('-', $param);
                     if (sizeof($param) > 1) {
                         $model = Mage::getModel('setbackground/backgrounditem');
-                        $model->setData(array('background_order' => $param[1]))->setId($param[0]);
+                        $model->setData(array('type' => $param[1]))->setId($param[0]);
                         $model->save();
                     }
                 }

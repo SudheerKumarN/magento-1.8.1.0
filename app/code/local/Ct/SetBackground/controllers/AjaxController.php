@@ -48,7 +48,7 @@ class Ct_SetBackground_AjaxController extends Mage_Core_Controller_Front_Action 
     
     public function titleAction($_storeId = 1) {
         
-        $type = $this->getRequest()->getParam(type, 'category');
+        $type = $this->getRequest()->getParam('type', 'category');
         
         switch ($type){
             case 'category':

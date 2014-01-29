@@ -81,8 +81,9 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
             'class' => 'required-entry',
             'required' => true,
             'name' => 'title',
-            'values' => $this->getCmsPageAndCategoryArray($this->getStoreId($this->getRequest()->getParam('id'))),
-//            'value' => 4
+//            'values' => $this->getCmsPageAndCategoryArray($this->getStoreId($this->getRequest()->getParam('id'))),
+            'values' => $this->getCategoryPageArray($_storeId = 1),
+//            'value' => 3
                 
         ));
 //        Mage::log($eventTitle);
@@ -134,12 +135,7 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
         return $store;
     }
 
-    /**
-     * Return array params for select item
-     * @param type $_storeId
-     * @return array
-     */
-    private function getCmsPageAndCategoryArray($_storeId = 1) 
+    private function getCategoryPageArray($_storeId = 1) 
     {
         $_storeId = $this->getRequest()->getParam('storeId', 1);
 
@@ -150,32 +146,63 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
             ->addIsActiveFilter()
             ->addLevelFilter(2)
             ->addFieldToFilter('path', array('like'=> "1/$rootId/%"));
-
-        $cat[] = array('value' => '=== Please select category ===', 'label' => '=== Please select category ===');
-        $cat[] = array('value' => 'Default Category', 'label' => 'Default Category');
+        $cat = array();
+        
+//        $cat[] = array('value' => '=== Please select category ===', 'label' => '=== Please select category ===');
+//        $cat[] = array('value' => 'Default Category', 'label' => 'Default Category');
         foreach ($categories as $category) {
             $cat[] = array(
-                'value' => 'cat_' . $category->getId(),
+                'value' => $category->getId(),
                 'label' => Mage::helper('setbackground')->__($category->getName()),
                 'style' => 'padding-left:10px;',
                 'class' => 'myclass',
             );
         }
-
-        $collection = Mage::getModel('cms/page')->getCollection()->addStoreFilter($_storeId);
-        $cat[] = array('value' => '=== Please select CMS Page ===', 'label' => '=== Please select category ===');
-
-        foreach ($collection as $category) {
-            $data = $category->getData();
-            $cat[] = array(
-                'value' => 'cms_' . $data['page_id'],
-                'label' => $data['title'],
-                'style' => 'padding-left:10px;',
-            );
-        }
-
+        
         return $cat;
     }
+    /**
+     * Return array params for select item
+     * @param type $_storeId
+     * @return array
+     */
+//    private function getCmsPageAndCategoryArray($_storeId = 1) 
+//    {
+//        $_storeId = $this->getRequest()->getParam('storeId', 1);
+//
+//        $rootId     = Mage::app()->getStore($_storeId)->getRootCategoryId();
+//        $categories = Mage::getModel('catalog/category')
+//            ->getCollection()
+//            ->addAttributeToSelect('*')
+//            ->addIsActiveFilter()
+//            ->addLevelFilter(2)
+//            ->addFieldToFilter('path', array('like'=> "1/$rootId/%"));
+//
+//        $cat[] = array('value' => '=== Please select category ===', 'label' => '=== Please select category ===');
+//        $cat[] = array('value' => 'Default Category', 'label' => 'Default Category');
+//        foreach ($categories as $category) {
+//            $cat[] = array(
+//                'value' => 'cat_' . $category->getId(),
+//                'label' => Mage::helper('setbackground')->__($category->getName()),
+//                'style' => 'padding-left:10px;',
+//                'class' => 'myclass',
+//            );
+//        }
+//
+//        $collection = Mage::getModel('cms/page')->getCollection()->addStoreFilter($_storeId);
+//        $cat[] = array('value' => '=== Please select CMS Page ===', 'label' => '=== Please select category ===');
+//
+//        foreach ($collection as $category) {
+//            $data = $category->getData();
+//            $cat[] = array(
+//                'value' => 'cms_' . $data['page_id'],
+//                'label' => $data['title'],
+//                'style' => 'padding-left:10px;',
+//            );
+//        }
+//
+//        return $cat;
+//    }
     
     
     
