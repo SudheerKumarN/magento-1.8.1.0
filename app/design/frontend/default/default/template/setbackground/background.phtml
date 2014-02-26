@@ -39,7 +39,7 @@ if(isset($configImage)){
         <?php $_background_items = $this->getBackgroundItem($currentPlace); ?>
 
         <?php foreach ($_background_items as $_background_item): ?>                           
-            <?php if ($_background_item->getTitle() == $currentPlace): ?>
+            <?php if ($_background_item->getItem_id() == $currentPlace): ?>
                 <div id="setbackground"></div>
                 <style>
                     #setbackground {

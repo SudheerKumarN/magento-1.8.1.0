@@ -2,6 +2,12 @@
 
 class Ct_SetBackground_Adminhtml_BackgrounditemController extends Mage_Adminhtml_Controller_action {
 
+    static $type = array(
+        'contacts' => 'Contact',
+        'customer' => 'Customer',
+        'checkout' => 'Checkout'
+    );
+    
     protected function _initAction() {
         $this->loadLayout()
                 ->_setActiveMenu('setbackground/backgrounditems')
@@ -51,6 +57,10 @@ class Ct_SetBackground_Adminhtml_BackgrounditemController extends Mage_Adminhtml
 
     public function saveAction() {
         if ($data = $this->getRequest()->getPost()) {
+             Mage::log($data);
+//             $data['item_id'] = $data['title'];
+             $data['title'] = $this->getTitle($_storeId = 1, $data['item_id'], $data['type']); 
+            
             if (isset($_FILES['image']['name']) && $_FILES['image']['name'] != '') {
                 try {
                     /* Starting upload */
@@ -83,47 +93,15 @@ class Ct_SetBackground_Adminhtml_BackgrounditemController extends Mage_Adminhtml
                 }
             }
             
-            Mage::log($data);
-            if (isset($data['type'])) {
-                $data['type'] = intval($data['type']);
-            }
-
-            if (isset($_FILES['thumb_image']['name']) && $_FILES['thumb_image']['name'] != '') {
-                try {
-                    /* Starting upload */
-                    $uploader = new Varien_File_Uploader('thumb_image');
-
-                    // Any extention would work
-                    $uploader->setAllowedExtensions(array('jpg', 'jpeg', 'gif', 'png'));
-                    $uploader->setAllowRenameFiles(true);
-
-                    // Set the file upload mode 
-                    // false -> get the file directly in the specified folder
-                    // true -> get the file in the product like folders 
-                    //	(file.jpg will go in something like /media/f/i/file.jpg)
-                    $uploader->setFilesDispersion(false);
-
-                    // We set media as the upload dir
-                    $path = Mage::getBaseDir('media') . DS . 'setbackground' . DS;
-                    $result = $uploader->save($path, $_FILES['thumb_image']['name']);
-
-                    //this way the name is saved in DB
-                    $data['thumb_image'] = 'setbackground/' . $result['file'];
-                } catch (Exception $e) {
-                    
-                }
-            } else {
-                if (isset($data['thumb_image']['delete']) && $data['thumb_image']['delete'] == 1) {
-                    $data['thumb_image'] = '';
-                } else {
-                    unset($data['thumb_image']);
-                }
-            }
-
+//            Mage::log($data);
+//            if (isset($data['type'])) {
+//                $data['type'] = intval($data['type']);
+//            }
 
             //$model = Mage::getModel('setbackground/backgrounditem');		
             //$model->setData($data)
             //	->setId($this->getRequest()->getParam('id'));
+//            Mage::log($data);
             $model = Mage::getModel('setbackground/backgrounditem');
             $model->setData($data);
             if ($this->getRequest()->getParam('id')) {
@@ -278,6 +256,28 @@ class Ct_SetBackground_Adminhtml_BackgrounditemController extends Mage_Adminhtml
         $response->setBody($content);
         $response->sendResponse();
         die;
+    }
+    
+    private function getTitle($_storeId = 1, $id = null, $type = null) 
+    {
+        if(empty($type) || empty($id)) return false;
+        
+        switch($type){
+            case 'category':
+                $categories = Mage::getModel('catalog/category')->load($id);
+                if(is_object($categories)) return $categories->getName();
+                break;
+            case 'page':
+                $collection = Mage::getModel('cms/page')->load($id);
+                Mage::log($collection->getData());
+                if(!empty($collection)) return $collection->getTitle();
+                break;
+            case 'route':
+                return self::$type[$id];
+                break;
+        }
+        
+        return false;
     }
 
 }

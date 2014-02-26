@@ -42,7 +42,7 @@ class Ct_SetBackground_Block_Background extends Mage_Core_Block_Template
             $collection = Mage::getModel('setbackground/backgrounditem')->getCollection()
                     ->addFieldToFilter('store', $storeId)
                     ->addFieldToFilter('status', true)
-                    ->addFieldToFilter('title', array('eq' => $currentPlace))
+                    ->addFieldToFilter('item_id', array('eq' => $currentPlace))
                     ->setOrder('type','ASC');
 //            Mage::log($collection->getData());
             return $collection;

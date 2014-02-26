@@ -18,8 +18,8 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Grid extends Mage_Adminhtm
 
     protected function _prepareColumns() {
 
-        Mage::log($this->getHelp());
-        Mage::log('help111');
+//        Mage::log($this->getHelp());
+//        Mage::log('help111');
 
         $this->setTemplate('setbackground/grid.phtml');
         $this->addColumn('background_item_id', array(
@@ -58,17 +58,25 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Grid extends Mage_Adminhtm
             'options' => Mage::helper('setbackground')->getStoreName()
         ));
 
+        $this->addColumn('type', array(
+            'header' => Mage::helper('setbackground')->__('Type'),
+            'align' => 'left',
+            'width' => 150,
+            'index' => 'type',
+        ));
+                
         $this->addColumn('title', array(
             'header' => Mage::helper('setbackground')->__('Title'),
             'align' => 'left',
             'index' => 'title',
         ));
 
-        $this->addColumn('type', array(
-            'header' => Mage::helper('setbackground')->__('Type'),
+        $this->addColumn('item_id', array(
+            'header' => Mage::helper('setbackground')->__('id'),
             'align' => 'left',
-            'width' => 64,
-            'index' => 'type',
+            'index' => 'item_id',
+//            'type' => 'options',
+//            'options'=> Mage::getModel('setbackground/backgrounditem')->getTitle()
         ));
 
         $this->addColumn('status', array(
@@ -141,6 +149,10 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Grid extends Mage_Adminhtm
     }
 
     private function getTitle($row) {
+        return $this->getUrl('*/*/edit', array('id' => $row->getId()));
+    }
+    
+    private function getCaptionItem($row) {
         return $this->getUrl('*/*/edit', array('id' => $row->getId()));
     }
 
