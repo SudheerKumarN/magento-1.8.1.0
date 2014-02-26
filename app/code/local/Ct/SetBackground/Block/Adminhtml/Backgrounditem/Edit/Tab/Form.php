@@ -175,6 +175,21 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
                     'label' => Mage::helper('setbackground')->__('Checkout')
                 );
                 break;
+            default:
+                $rootId     = Mage::app()->getStore($_storeId)->getRootCategoryId();
+                $collection = Mage::getModel('catalog/category')
+                        ->getCollection()
+                        ->addAttributeToSelect('*')
+                        ->addIsActiveFilter()
+                        ->addLevelFilter(2)
+                        ->addFieldToFilter('path', array('like'=> "1/$rootId/%"));
+                foreach ($collection as $item) {
+                    $cat[] = array(
+                        'value' => $item->getId(),
+                        'label' => Mage::helper('setbackground')->__($item->getName())    
+                    );
+                }
+                break;
         }
 
 

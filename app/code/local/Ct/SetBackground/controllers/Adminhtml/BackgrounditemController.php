@@ -7,7 +7,7 @@ class Ct_SetBackground_Adminhtml_BackgrounditemController extends Mage_Adminhtml
         'customer' => 'Customer',
         'checkout' => 'Checkout'
     );
-    
+
     protected function _initAction() {
         $this->loadLayout()
                 ->_setActiveMenu('setbackground/backgrounditems')
@@ -20,7 +20,7 @@ class Ct_SetBackground_Adminhtml_BackgrounditemController extends Mage_Adminhtml
         $this->_initAction()
                 ->renderLayout();
     }
-    
+
     public function editAction() {
         $id = $this->getRequest()->getParam('id');
         $model = Mage::getModel('setbackground/backgrounditem')->load($id);
@@ -57,10 +57,8 @@ class Ct_SetBackground_Adminhtml_BackgrounditemController extends Mage_Adminhtml
 
     public function saveAction() {
         if ($data = $this->getRequest()->getPost()) {
-             Mage::log($data);
-//             $data['item_id'] = $data['title'];
-             $data['title'] = $this->getTitle($_storeId = 1, $data['item_id'], $data['type']); 
-            
+            $data['title'] = $this->getTitle($_storeId = 1, $data['item_id'], $data['type']);
+
             if (isset($_FILES['image']['name']) && $_FILES['image']['name'] != '') {
                 try {
                     /* Starting upload */
@@ -81,7 +79,7 @@ class Ct_SetBackground_Adminhtml_BackgrounditemController extends Mage_Adminhtml
                     $result = $uploader->save($path, $_FILES['image']['name']);
 
                     //this way the name is saved in DB
-                    $data['image'] = 'setbackground/' . $result['file'];
+                    $data['image'] = 'setbackground' . DS . $result['file'];
                 } catch (Exception $e) {
                     
                 }
@@ -92,22 +90,13 @@ class Ct_SetBackground_Adminhtml_BackgrounditemController extends Mage_Adminhtml
                     unset($data['image']);
                 }
             }
-            
-//            Mage::log($data);
-//            if (isset($data['type'])) {
-//                $data['type'] = intval($data['type']);
-//            }
 
-            //$model = Mage::getModel('setbackground/backgrounditem');		
-            //$model->setData($data)
-            //	->setId($this->getRequest()->getParam('id'));
-//            Mage::log($data);
             $model = Mage::getModel('setbackground/backgrounditem');
             $model->setData($data);
             if ($this->getRequest()->getParam('id')) {
                 $model->setId($this->getRequest()->getParam('id'));
             }
-            //exit;
+
             try {
                 if ($model->getCreatedTime == NULL || $model->getUpdateTime() == NULL) {
                     $model->setCreatedTime(now())
@@ -201,7 +190,6 @@ class Ct_SetBackground_Adminhtml_BackgrounditemController extends Mage_Adminhtml
 
     public function setOrderAction() {
         $params = $this->getRequest()->getParam('items');
-        //var_dump($params);exit;
         if (!$params) {
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Please select item(s)'));
         } else {
@@ -257,27 +245,28 @@ class Ct_SetBackground_Adminhtml_BackgrounditemController extends Mage_Adminhtml
         $response->sendResponse();
         die;
     }
-    
-    private function getTitle($_storeId = 1, $id = null, $type = null) 
-    {
-        if(empty($type) || empty($id)) return false;
-        
-        switch($type){
+
+    private function getTitle($_storeId = 1, $id = null, $type = null) {
+        if (empty($type) || empty($id))
+            return false;
+
+        switch ($type) {
             case 'category':
                 $categories = Mage::getModel('catalog/category')->load($id);
-                if(is_object($categories)) return $categories->getName();
+                if (is_object($categories))
+                    return $categories->getName();
                 break;
             case 'page':
                 $collection = Mage::getModel('cms/page')->load($id);
                 Mage::log($collection->getData());
-                if(!empty($collection)) return $collection->getTitle();
+                if (!empty($collection))
+                    return $collection->getTitle();
                 break;
             case 'route':
                 return self::$type[$id];
                 break;
         }
-        
+
         return false;
     }
-
 }
