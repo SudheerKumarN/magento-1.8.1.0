@@ -1,4 +1,23 @@
 <?xml version="1.0"?>
+<!--
+/**
+* NOTICE OF LICENSE
+*
+* You may not sell, sub-license, rent or lease
+* any portion of the Software or Documentation to anyone.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade to newer
+* versions in the future.
+*
+* @category   Ct
+* @package    Ct_SetBackground
+* @copyright  Copyright (c) 2014 Ct Web Solutions (http://codetiburon.com/)
+* @contacts   info@codetiburon.com
+* @license    http://shop.etwebsolutions.com/etws-license-free-v1/   ETWS Free License (EFL1)
+*/
+-->
 <config>
     <modules>
         <Ct_SetBackground>
@@ -36,19 +55,12 @@
             </setbackground>
         </routers>
     </admin>
-    
+
     <adminhtml>
         <menu>
             <setbackground module="setbackground">
                 <title>Set Background</title>
-                <sort_order>71</sort_order>               
-              <!--  <children>
-                    <backgrounds module="setbackground">
-                        <title>Manage SetBackgrounds</title>
-                        <sort_order>0</sort_order>
-                        <action>setbackground/adminhtml_background</action>
-                    </backgrounds>
-                </children>-->
+                <sort_order>91</sort_order>             
                 <children>
                     <backgrounditems module="setbackground">
                         <title>Manage SetBackground Items</title>
@@ -58,44 +70,7 @@
                 </children>
             </setbackground>
         </menu>
-        <acl>
-            <resources>
-                <all>
-                    <title>Allow Everything</title>
-                </all>
-                <admin>
-                    <children>
-                        <setbackground module="setbackground">
-                            <title>Set Background</title>
-                            <sort_order>71</sort_order>               
-                            <children>
-                                <backgrounds module="setbackground">
-                                    <title>Manage SetBackgrounds</title>
-                                    <sort_order>0</sort_order>
-                                </backgrounds>
-                            </children>
-                            <children>
-                                <backgrounditems module="setbackground">
-                                    <title>Manage SetBackground Items</title>
-                                    <sort_order>10</sort_order>
-                                </backgrounditems>
-                            </children>
-                        </setbackground>
-                        <system>
-                            <children>
-                                <config>
-                                    <children>
-                                        <setbackground translate="title" module="setbackground">
-                                            <title>Set Background</title>
-                                        </setbackground>
-                                    </children>
-                                </config>
-                            </children>
-                        </system>
-                    </children>
-                </admin>
-            </resources>
-        </acl>
+        
         <layout>
             <updates>
                 <setbackground>
@@ -124,11 +99,6 @@
             
             <setbackground_mysql4>
                 <class>Ct_SetBackground_Model_Mysql4</class>                
-           <!--     <entities>
-                    <background>
-                        <table>set_background</table>
-                    </background>
-                </entities> -->
                 <entities>
                     <backgrounditem>
                         <table>set_background_item</table>
