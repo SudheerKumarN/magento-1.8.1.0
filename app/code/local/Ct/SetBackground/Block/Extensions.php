@@ -39,7 +39,7 @@ class Ct_SetBackground_Block_Extensions extends Mage_Adminhtml_Block_System_Conf
         if (!$currentVer)
             return '';
 
-        $moduleName = substr($moduleCode, strpos($moduleCode, '_') + 1); // in case we have no data in the RSS 
+        $moduleName = substr($moduleCode, strpos($moduleCode, '_') + 1);
 
         $allExtensions = unserialize(Mage::app()->loadCache('info_extensions'));
 

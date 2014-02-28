@@ -11,15 +11,12 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Grid extends Mage_Adminhtm
     }
 
     protected function _prepareCollection() {
-        $collection = Mage::getModel('setbackground/backgrounditem')->getCollection()->setOrder('background_id', 'DESC')->setOrder('type', 'ASC');
+        $collection = Mage::getModel('setbackground/backgrounditem')->getCollection()->setOrder('background_item_id', 'DESC')->setOrder('type', 'ASC');
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
 
     protected function _prepareColumns() {
-
-//        Mage::log($this->getHelp());
-//        Mage::log('help111');
 
         $this->setTemplate('setbackground/grid.phtml');
         $this->addColumn('background_item_id', array(
@@ -58,11 +55,14 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Grid extends Mage_Adminhtm
             'options' => Mage::helper('setbackground')->getStoreName()
         ));
 
+        
         $this->addColumn('type', array(
-            'header' => Mage::helper('setbackground')->__('Type'),
-            'align' => 'left',
-            'width' => 150,
-            'index' => 'type',
+            'header'    => Mage::helper('setbackground')->__('Type'),
+            'align'     => 'left',
+            'width'     => 150,
+            'index'     => 'type',
+            'type'      => 'options',
+            'options'   => Mage::helper('setbackground')->getTypeName(),
         ));
                 
         $this->addColumn('title', array(

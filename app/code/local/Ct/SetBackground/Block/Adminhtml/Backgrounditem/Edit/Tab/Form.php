@@ -2,7 +2,6 @@
 
 class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage_Adminhtml_Block_Widget_Form {
 
-    
     protected function _prepareForm() {
         $form = new Varien_Data_Form();
         $this->setForm($form);
@@ -15,7 +14,7 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
             'required' => true,
             'name' => 'store',
             'values' => $this->getStoreArray()
-                ));
+        ));
         $fielsStore->setAfterElementHtml("
         <script type='text/javascript'>
             function storeSelect(selectValue)
@@ -27,8 +26,8 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
                 console.log(myVariable);    
                 
             }
-        </script>");        
-        
+        </script>");
+
         $eventType = $fieldset->addField('type', 'select', array(
             'label' => Mage::helper('setbackground')->__('Type'),
             'class' => 'required-entry',
@@ -36,19 +35,19 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
             'onchange' => "typeSelect(this)",
             'name' => 'type',
             'values' => array(
-                'category' => 'Category page', 
-                'page' => 'Cms page', 
+                'category' => 'Category page',
+                'page' => 'Cms page',
                 'route' => 'Route page'
-                ),  
-        ));
-        
+            ),
+                ));
+
         /*
          * Add Ajax to the Title select box html output
          */
         $eventType->setAfterElementHtml("<script type=\"text/javascript\">
             function typeSelect(selectElement){
-                var reloadurl = '". $this
-                 ->getUrl('setbackground/ajax/title') . "type/' + selectElement.value;
+                var reloadurl = '" . $this
+                        ->getUrl('setbackground/ajax/title') . "type/' + selectElement.value;
                 new Ajax.Request(reloadurl, {
                     method: 'get',
                     onLoading: function (stateform) {
@@ -60,9 +59,9 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
                 });
             }
         </script>");
-        
 
-        
+
+
 //        $eventTitle = $fieldset->addField('title', 'select', array(
 //            'label' => Mage::helper('setbackground')->__('Title'),
 //            'class' => 'required-entry',
@@ -78,7 +77,7 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
             'class' => 'required-entry',
             'required' => true,
             'name' => 'item_id',
-            'values' => $this->getCategoryPageArray($_storeId = 1),     
+            'values' => $this->getCategoryPageArray($_storeId = 1),
         ));
 
         $fieldset->addField('image', 'image', array(
@@ -127,27 +126,26 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
         return $store;
     }
 
-    private function getCategoryPageArray($_storeId = 1) 
-    {
+    private function getCategoryPageArray($_storeId = 1) {
         $_storeId = $this->getRequest()->getParam('storeId', 1);
         $background_item_id = $this->getRequest()->getParam('id', null);
         $type = $this->getCurrentType($background_item_id, $storeId = 1);
         $collection = null;
-        $cat = array();        
-        
-        switch($type){
+        $cat = array();
+
+        switch ($type) {
             case 'category':
-                $rootId     = Mage::app()->getStore($_storeId)->getRootCategoryId();
+                $rootId = Mage::app()->getStore($_storeId)->getRootCategoryId();
                 $collection = Mage::getModel('catalog/category')
                         ->getCollection()
                         ->addAttributeToSelect('*')
                         ->addIsActiveFilter()
                         ->addLevelFilter(2)
-                        ->addFieldToFilter('path', array('like'=> "1/$rootId/%"));
+                        ->addFieldToFilter('path', array('like' => "1/$rootId/%"));
                 foreach ($collection as $item) {
                     $cat[] = array(
                         'value' => $item->getId(),
-                        'label' => Mage::helper('setbackground')->__($item->getName())    
+                        'label' => Mage::helper('setbackground')->__($item->getName())
                     );
                 }
                 break;
@@ -176,17 +174,17 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
                 );
                 break;
             default:
-                $rootId     = Mage::app()->getStore($_storeId)->getRootCategoryId();
+                $rootId = Mage::app()->getStore($_storeId)->getRootCategoryId();
                 $collection = Mage::getModel('catalog/category')
                         ->getCollection()
                         ->addAttributeToSelect('*')
                         ->addIsActiveFilter()
                         ->addLevelFilter(2)
-                        ->addFieldToFilter('path', array('like'=> "1/$rootId/%"));
+                        ->addFieldToFilter('path', array('like' => "1/$rootId/%"));
                 foreach ($collection as $item) {
                     $cat[] = array(
                         'value' => $item->getId(),
-                        'label' => Mage::helper('setbackground')->__($item->getName())    
+                        'label' => Mage::helper('setbackground')->__($item->getName())
                     );
                 }
                 break;
@@ -196,25 +194,28 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
 //        Mage::log($cat);
         return $cat;
     }
-    
+
     private function getStoreId($itemId) {
         $collection = Mage::getModel('setbackground/backgrounditem')->getCollection()->addFieldToFilter('background_item_id', $itemId);
-        foreach ($collection as $item){
-            if($item->getStore()){
+        foreach ($collection as $item) {
+            if ($item->getStore()) {
                 return $item->getStore();
             }
         }
         return false;
     }
-    
+
     public function getCurrentType($background_item_id, $storeId = 1) {
 
         $collection = Mage::getModel('setbackground/backgrounditem')->getCollection()
                 ->addFieldToFilter('store', $storeId)
                 ->addFieldToFilter('background_item_id', array('eq' => $background_item_id));
-        if(is_object($collection)) return $collection->getFirstItem()->getType();
-        else false;
+        if (is_object($collection))
+            return $collection->getFirstItem()->getType();
+        else
+            false;
     }
+
 }
 ?>
 
@@ -228,21 +229,21 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
             data: { storeId : storeId },
             dataType: "json",
             success: function(data) 
-             {                      
-    //                        var data = {
-    //                            val1 : 'text1',
-    //                            val2 : 'text2'
-    //                        };
+            {                      
+                //                        var data = {
+                //                            val1 : 'text1',
+                //                            val2 : 'text2'
+                //                        };
 
                 jQuery("#item_id").empty();
                 var mySelect = jQuery('#item_id');
                 jQuery.each(data, function(val, text) { 
-    //                            console.log(val);
+                    //                            console.log(val);
                     mySelect.append(
-                        jQuery('<option></option>').val(text.value).html(text.value)
-                    );
+                    jQuery('<option></option>').val(text.value).html(text.value)
+                );
                 });
-             }
+            }
         });
     };
 </script>

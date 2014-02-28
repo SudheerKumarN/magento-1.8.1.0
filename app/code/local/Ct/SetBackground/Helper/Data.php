@@ -56,7 +56,16 @@ class Ct_SetBackground_Helper_Data extends Mage_Core_Helper_Abstract
 
             $store[$_storeId] = $_storeName;           
         }
-        return $store;
+        return $store; 
+    }
+    
+    public function getTypeName()
+    {
+        return array(
+                'category'  => Mage::helper('setbackground')->__('Category page'),
+                'page'      => Mage::helper('setbackground')->__('Cms page'),
+                'route'     => Mage::helper('setbackground')->__('Route page'),
+            );
     }
     
     public function getCurrentPlace()
