@@ -275,7 +275,6 @@ class Ct_SetBackground_Adminhtml_BackgrounditemController extends Mage_Adminhtml
                 break;
             case 'page':
                 $collection = Mage::getModel('cms/page')->load($id);
-                Mage::log($collection->getData());
                 if (!empty($collection))
                     return $collection->getTitle();
                 break;
