@@ -1,8 +1,26 @@
 <?php
+/**
+* NOTICE OF LICENSE
+*
+* You may not sell, sub-license, rent or lease
+* any portion of the Software or Documentation to anyone.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade to newer
+* versions in the future.
+*
+* @category   Ct
+* @package    Ct_SetBackground
+* @copyright  Copyright (c) 2014 Ct Web Solutions (http://codetiburon.com/)
+* @contacts   info@codetiburon.com
+* @license    http://shop.etwebsolutions.com/etws-license-free-v1/   ETWS Free License (EFL1)
+*/
 
 class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage_Adminhtml_Block_Widget_Form {
 
     protected function _prepareForm() {
+        
         $form = new Varien_Data_Form();
         $this->setForm($form);
         $fieldset = $form->addFieldset('setbackgrounditem_form', array('legend' => Mage::helper('setbackground')->__('Background Item information')));
@@ -59,18 +77,6 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
                 });
             }
         </script>");
-
-
-
-//        $eventTitle = $fieldset->addField('title', 'select', array(
-//            'label' => Mage::helper('setbackground')->__('Title'),
-//            'class' => 'required-entry',
-//            'required' => true,
-//            'onchange' => "titleSelect(this)",
-//            'name' => 'title',
-////            'values' => $this->getCmsPageAndCategoryArray($this->getStoreId($this->getRequest()->getParam('id'))),
-//            'values' => $this->getCategoryPageArray($_storeId = 1),               
-//        ));
 
         $fieldset->addField('item_id', 'select', array(
             'label' => Mage::helper('setbackground')->__('Title'),
@@ -152,7 +158,6 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
             case 'page':
                 $collection = Mage::getModel('cms/page')->getCollection()->addStoreFilter($_storeId);
                 foreach ($collection as $item) {
-//                    Mage::log($item->getData());
                     $cat[] = array(
                         'value' => $item->getPage_id(),
                         'label' => $item->getTitle()
@@ -189,9 +194,6 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
                 }
                 break;
         }
-
-
-//        Mage::log($cat);
         return $cat;
     }
 
@@ -215,7 +217,6 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
         else
             false;
     }
-
 }
 ?>
 
@@ -230,18 +231,12 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Edit_Tab_Form extends Mage
             dataType: "json",
             success: function(data) 
             {                      
-                //                        var data = {
-                //                            val1 : 'text1',
-                //                            val2 : 'text2'
-                //                        };
-
                 jQuery("#item_id").empty();
                 var mySelect = jQuery('#item_id');
                 jQuery.each(data, function(val, text) { 
-                    //                            console.log(val);
                     mySelect.append(
-                    jQuery('<option></option>').val(text.value).html(text.value)
-                );
+                        jQuery('<option></option>').val(text.value).html(text.value)
+                    );
                 });
             }
         });

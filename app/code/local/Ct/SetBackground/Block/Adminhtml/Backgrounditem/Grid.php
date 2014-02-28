@@ -1,4 +1,21 @@
 <?php
+/**
+* NOTICE OF LICENSE
+*
+* You may not sell, sub-license, rent or lease
+* any portion of the Software or Documentation to anyone.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade to newer
+* versions in the future.
+*
+* @category   Ct
+* @package    Ct_SetBackground
+* @copyright  Copyright (c) 2014 Ct Web Solutions (http://codetiburon.com/)
+* @contacts   info@codetiburon.com
+* @license    http://shop.etwebsolutions.com/etws-license-free-v1/   ETWS Free License (EFL1)
+*/
 
 class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Grid extends Mage_Adminhtml_Block_Widget_Grid {
 
@@ -26,20 +43,6 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Grid extends Mage_Adminhtm
             'index' => 'background_item_id',
         ));
 
-//        $backgrounds = array();
-//        $collection = Mage::getModel('setbackground/background')->getCollection();
-//        foreach ($collection as $background) {
-//             $backgrounds[$background->getId()] = $background->getTitle();
-//        }
-//
-//        $this->addColumn('background_id', array(
-//            'header'    => Mage::helper('setbackground')->__('Background'),
-//            'align'     =>'left',
-//            'index'     => 'background_id',
-//                  'type'      => 'options',
-//            'options'   => $backgrounds,
-//        ));
-//
         $this->addColumn('image', array(
             'header' => Mage::helper('setbackground')->__('Image'),
             'type' => 'image',
@@ -70,13 +73,11 @@ class Ct_SetBackground_Block_Adminhtml_Backgrounditem_Grid extends Mage_Adminhtm
             'align' => 'left',
             'index' => 'title',
         ));
-
-        $this->addColumn('item_id', array(
-            'header' => Mage::helper('setbackground')->__('id'),
+        
+        $this->addColumn('created_time', array(
+            'header' => Mage::helper('setbackground')->__('Created time'),
             'align' => 'left',
-            'index' => 'item_id',
-//            'type' => 'options',
-//            'options'=> Mage::getModel('setbackground/backgrounditem')->getTitle()
+            'index' => 'created_time',
         ));
 
         $this->addColumn('status', array(
