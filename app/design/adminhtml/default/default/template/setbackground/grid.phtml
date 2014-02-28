@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    <!--
+
     function save_order(){
 
         var arrInput = document.getElementsByClassName('background_order');
@@ -10,7 +10,7 @@
         }
         window.location = "<?php echo $this->getUrl('*/*/setOrder') ?>items/"+params; 
     }
-    //-->
+
 </script>
 <style>
     .background_order{
@@ -134,7 +134,8 @@ $numColumns = sizeof($this->getColumns());
                             <?php if ($this->getFilterVisibility()): ?>
                                 <tr class="filter">
                                     <?php $i = 0;
-                                    foreach ($this->getColumns() as $_column): ?>
+                                    foreach ($this->getColumns() as $_column):
+                                        ?>
                                         <th<?php echo $_column->getHeaderHtmlProperty() ?>><?php echo $_column->getFilterHtml() ?></th>
                                 <?php endforeach; ?>
                                 </tr>
@@ -157,7 +158,8 @@ $numColumns = sizeof($this->getColumns());
                                 <?php foreach ($this->getCollection() as $_index => $_item): ?>
                                 <tr title="<?php echo $this->getRowUrl($_item) ?>"<?php if ($_class = $this->getRowClass($_item)): ?> class="<?php echo $_class; ?>"<?php endif; ?> >            
                                     <?php $i = 0;
-                                    foreach ($this->getColumns() as $_column): ?>
+                                    foreach ($this->getColumns() as $_column):
+                                        ?>
                                             <?php $_rowspan = $this->getRowspan($_item, $_column); ?>
                                         <td style="vertical-align:middle;" <?php echo ($_rowspan ? 'rowspan="' . $_rowspan . '" ' : '') ?>class="<?php echo $_column->getCssProperty() ?> <?php echo++$i == $numColumns ? 'last' : '' ?>">
                                             <?php
@@ -167,32 +169,34 @@ $numColumns = sizeof($this->getColumns());
                                                 <img src="<?php echo $this->helper('setbackground/image')->init($_item->getImage())->resize(80, 80) ?>" /> 
                                             <?php } else if ($_column->getHeader() == Mage::helper('setbackground')->__("Order")) { ?>
                                                 <input type="text" class="background_order" title="<?php echo $_item->getBannerItemId(); ?>" style="width:60px;" id="background_order<?php echo $_item->getBannerItemId(); ?>" value="<?php echo $_html; ?>">
-                                        <?php } else {
-                                            echo $_html;
-                                        }
-                                        ?>
+                                            <?php
+                                            } else {
+                                                echo $_html;
+                                            }
+                                            ?>
                                         </td>
-                                    <?php endforeach; ?>
+                                <?php endforeach; ?>
                                 </tr>
-                                        <?php if ($_multipleRows = $this->getMultipleRows($_item)): ?>
-                                            <?php foreach ($_multipleRows as $_i): ?>
+                                    <?php if ($_multipleRows = $this->getMultipleRows($_item)): ?>
+                                        <?php foreach ($_multipleRows as $_i): ?>
                                         <tr>
-                                            <?php $i = 0;
-                                            foreach ($this->getMultipleRowColumns($_i) as $_column): ?>
+                                                <?php $i = 0;
+                                                foreach ($this->getMultipleRowColumns($_i) as $_column):
+                                                    ?>
                                                 <td class="<?php echo $_column->getCssProperty() ?> <?php echo++$i == $numColumns - 1 ? 'last' : '' ?>">
                                             <?php echo (($_html = $_column->getRowField($_i)) != '' ? $_html : '&nbsp;') ?>
                                                 </td>
                                         <?php endforeach; ?>
                                         </tr>
-                <?php endforeach; ?>
+                                    <?php endforeach; ?>
             <?php endif; ?>
 
                             <?php endforeach; ?>
-    <?php elseif ($this->getEmptyText()): ?>
+                        <?php elseif ($this->getEmptyText()): ?>
                             <tr>
                                 <td class="empty-text <?php echo $this->getEmptyTextClass() ?>" colspan="100"><?php echo $this->getEmptyText() ?></td>
                             </tr>
-        <?php endif; ?>
+    <?php endif; ?>
                     </tbody>
 
                 </table>
@@ -217,8 +221,7 @@ $numColumns = sizeof($this->getColumns());
         <?php if ($this->getMassactionBlock()->isAvailable()): ?>
             <?php echo $this->getMassactionBlock()->getJavaScript() ?>
         <?php endif ?>
-                //]]>
+            //]]>
         </script>
     <?php endif; ?>
-    <?php
- endif ?>
+<?php endif ?>

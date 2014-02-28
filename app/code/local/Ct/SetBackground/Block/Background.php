@@ -76,10 +76,8 @@ class Ct_SetBackground_Block_Background extends Mage_Core_Block_Template {
 
     public function getConfigImage() {
         $config = Mage::getStoreConfig('setbackground/image');
-        Mage::log($config);
 
-        if (isset($config))
-            return $config;
+        if (isset($config)) return $config;
         return false;
     }
 
@@ -87,8 +85,7 @@ class Ct_SetBackground_Block_Background extends Mage_Core_Block_Template {
         $module = Mage::app()->getConfig()->getModuleConfig('Ct_SetBackground')->active;
         $config = Mage::getStoreConfig('setbackground/info/enabled');
 
-        if ($module AND $config)
-            return true;
+        if ($module AND $config) return true;
         return false;
     }
 
