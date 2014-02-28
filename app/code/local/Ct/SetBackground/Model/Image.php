@@ -1,4 +1,21 @@
 <?php
+/**
+* NOTICE OF LICENSE
+*
+* You may not sell, sub-license, rent or lease
+* any portion of the Software or Documentation to anyone.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade to newer
+* versions in the future.
+*
+* @category   Ct
+* @package    Ct_SetBackground
+* @copyright  Copyright (c) 2014 Ct Web Solutions (http://codetiburon.com/)
+* @contacts   info@codetiburon.com
+* @license    http://shop.etwebsolutions.com/etws-license-free-v1/   ETWS Free License (EFL1)
+*/
 
 class Ct_SetBackground_Model_Image extends Mage_Core_Model_Abstract {
 
@@ -15,9 +32,6 @@ class Ct_SetBackground_Model_Image extends Mage_Core_Model_Abstract {
     protected $_processor;
     protected $_destinationSubdir;
     protected $_angle;
-    protected $_watermarkPosition;
-    protected $_watermarkWidth;
-    protected $_watermarkHeigth;
 
     /**
      * @return Ct_SetBackground_Model_Image
@@ -31,9 +45,6 @@ class Ct_SetBackground_Model_Image extends Mage_Core_Model_Abstract {
         return $this->_width;
     }
 
-    /**
-     * @return Ct_SetBackground_Model_Image
-     */
     public function setHeight($height) {
         $this->_height = $height;
         return $this;
@@ -43,49 +54,31 @@ class Ct_SetBackground_Model_Image extends Mage_Core_Model_Abstract {
         return $this->_height;
     }
 
-    /**
-     * @return Ct_SetBackground_Model_Image
-     */
     public function setKeepAspectRatio($keep) {
         $this->_keepAspectRatio = (bool) $keep;
         return $this;
     }
 
-    /**
-     * @return Ct_SetBackground_Model_Image
-     */
     public function setKeepFrame($keep) {
         $this->_keepFrame = (bool) $keep;
         return $this;
     }
 
-    /**
-     * @return Ct_SetBackground_Model_Image
-     */
     public function setKeepTransparency($keep) {
         $this->_keepTransparency = (bool) $keep;
         return $this;
     }
 
-    /**
-     * @return Ct_SetBackground_Model_Image
-     */
     public function setConstrainOnly($flag) {
         $this->_constrainOnly = (bool) $flag;
         return $this;
     }
 
-    /**
-     * @return Ct_SetBackground_Model_Image
-     */
     public function setBackgroundColor(array $rgbArray) {
         $this->_backgroundColor = $rgbArray;
         return $this;
     }
 
-    /**
-     * @return Ct_SetBackground_Model_Image
-     */
     public function setSize($size) {
         // determine width and height from string
         list($width, $height) = explode('x', strtolower($size), 2);
@@ -95,9 +88,7 @@ class Ct_SetBackground_Model_Image extends Mage_Core_Model_Abstract {
                 $$wh = null;
         }
 
-        // set sizes
         $this->setWidth($width)->setHeight($height);
-
         return $this;
     }
 
@@ -264,40 +255,6 @@ class Ct_SetBackground_Model_Image extends Mage_Core_Model_Abstract {
         return $this;
     }
 
-    public function setWatermark($file, $position = null, $size = null, $width = null, $heigth = null) {
-        $filename = false;
-
-        if (!$file) {
-            return $this;
-        }
-
-        $baseDir = Mage::getSingleton('catalog/product_media_config')->getBaseMediaPath();
-
-        if (file_exists($baseDir . '/watermark/stores/' . Mage::app()->getStore()->getId() . $file)) {
-            $filename = $baseDir . '/watermark/stores/' . Mage::app()->getStore()->getId() . $file;
-        } elseif (file_exists($baseDir . '/watermark/websites/' . Mage::app()->getWebsite()->getId() . $file)) {
-            $filename = $baseDir . '/watermark/websites/' . Mage::app()->getWebsite()->getId() . $file;
-        } elseif (file_exists($baseDir . '/watermark/default/' . $file)) {
-            $filename = $baseDir . '/watermark/default/' . $file;
-        } elseif (file_exists($baseDir . '/watermark/' . $file)) {
-            $filename = $baseDir . '/watermark/' . $file;
-        } else {
-            $baseDir = Mage::getDesign()->getSkinBaseDir();
-            if (file_exists($baseDir . $file)) {
-                $filename = $baseDir . $file;
-            }
-        }
-
-        if ($filename) {
-            $this->getImageProcessor()
-                    ->setWatermarkPosition(($position) ? $position : $this->getWatermarkPosition() )
-                    ->setWatermarkWidth(($width) ? $width : $this->getWatermarkWidth() )
-                    ->setWatermarkHeigth(($heigth) ? $heigth : $this->getWatermarkHeigth() )
-                    ->watermark($filename);
-        }
-        return $this;
-    }
-
     public function saveFile() {
         $this->getImageProcessor()->save($this->getBaseDir() . $this->getNewFile());
         return $this;
@@ -324,41 +281,6 @@ class Ct_SetBackground_Model_Image extends Mage_Core_Model_Abstract {
 
     public function isCached() {
         return file_exists($this->getBaseDir() . $this->_newFile);
-    }
-
-    public function setWatermarkPosition($position) {
-        $this->_watermarkPosition = $position;
-        return $this;
-    }
-
-    public function getWatermarkPosition() {
-        return $this->_watermarkPosition;
-    }
-
-    public function setWatermarkSize($size) {
-        if (is_array($size)) {
-            $this->setWatermarkWidth($size['width'])
-                    ->setWatermarkHeigth($size['heigth']);
-        }
-        return $this;
-    }
-
-    public function setWatermarkWidth($width) {
-        $this->_watermarkWidth = $width;
-        return $this;
-    }
-
-    public function getWatermarkWidth() {
-        return $this->_watermarkWidth;
-    }
-
-    public function setWatermarkHeigth($heigth) {
-        $this->_watermarkHeigth = $heigth;
-        return $this;
-    }
-
-    public function getWatermarkHeigth() {
-        return $this->_watermarkHeigth;
     }
 
     public function clearCache() {
