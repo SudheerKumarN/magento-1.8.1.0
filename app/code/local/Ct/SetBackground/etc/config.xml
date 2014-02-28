@@ -38,7 +38,7 @@
         <layout>
             <updates>
                 <setbackground>
-                    <file>setbackground.xml</file>
+                    <file>ct/setbackground.xml</file>
                 </setbackground>
             </updates>
         </layout>

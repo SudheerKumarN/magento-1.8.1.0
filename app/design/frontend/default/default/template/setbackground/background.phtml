@@ -1,22 +1,28 @@
 <?php
 /**
- * Set background for:
- * Home page
- * Category default
- * Category custom
- * Product page
- * CMS page 
- * 
- */
+* NOTICE OF LICENSE
+*
+* You may not sell, sub-license, rent or lease
+* any portion of the Software or Documentation to anyone.
+*
+* DISCLAIMER
+*
+* Do not edit or add to this file if you wish to upgrade to newer
+* versions in the future.
+*
+* @category   Ct
+* @package    Ct_SetBackground
+* @copyright  Copyright (c) 2014 Ct Web Solutions (http://codetiburon.com/)
+* @contacts   info@codetiburon.com
+* @license    http://shop.etwebsolutions.com/etws-license-free-v1/   ETWS Free License (EFL1)
+*/
 
 $currentPlace = Mage::helper('setbackground')->getCurrentPlace();
-//echo $currentPlace;
-
 $model = Mage::getModel('catalog/category');
-$categories = $model->getCollection()->addAttributeToSelect('*')->addIsActiveFilter()->addLevelFilter(2);
+//$categories = $model->getCollection()->addAttributeToSelect('*')->addIsActiveFilter()->addLevelFilter(2);
 $configImage = $this->getConfigImage();
-$attachment = '';
-$repeat = '';
+$attachment = $repeat = $zindex = null;
+
 if(isset($configImage)){
     if($configImage['repeat-x'] == 1 AND $configImage['repeat-y'] == 1) $repeat = 'repeat';
     elseif($configImage['repeat-x'] == 1 AND $configImage['repeat-y'] == 0) $repeat = 'repeat-x';
@@ -26,15 +32,10 @@ if(isset($configImage)){
     $attachment = $configImage['attachment'];
     $zindex = $configImage['z-index'];
 }
-
-//if($this->getConfigImage()) print 'true';
-//else print 'false';
-
 ?>
 
 <?php if (Mage::getStoreConfig('setbackground/info/enabled')): ?>
 
-        <?php //$_background = $this->getBackground(); ?>
         <?php $_background_items = $this->getBackgroundItem($currentPlace); ?>
 
         <?php foreach ($_background_items as $_background_item): ?>                           
